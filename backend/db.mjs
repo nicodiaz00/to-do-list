@@ -5,3 +5,10 @@ const db = await open({
     filename: 'tasks_db.sqlite',
     driver: sqlite3.Database
 });
+
+export async function listTasks() {
+
+    return await db.all('Select * from TASKS');
+
+    
+}
