@@ -1,6 +1,7 @@
 import express from 'express';
 import { listTasks } from './db.mjs';
 import { postTask } from './db.mjs';
+import { putTask } from './db.mjs';
 const app = express();
 
 
@@ -29,7 +30,16 @@ app.post('/tasks',async(req, res)=> {
 
 });
 
-app.put('/tasks/:id',(req, res)=>{
+app.put('/tasks/:id',async(req, res)=>{
+
+    try{
+        const {title, description,completed} = req.body;
+        const {id} = req.params;
+        await putTask(title,description,completed,id);
+        res.status(201).json({message :"Tarea editada"});
+    }catch(error){
+        res.status(404).json({error:"No se pudo editar la tarea"});
+    }
 
 });
 
