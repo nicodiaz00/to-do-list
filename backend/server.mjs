@@ -2,6 +2,7 @@ import express from 'express';
 import { listTasks } from './db.mjs';
 import { postTask } from './db.mjs';
 import { putTask } from './db.mjs';
+import {deleteTask} from './db.mjs';
 const app = express();
 
 
@@ -43,7 +44,15 @@ app.put('/tasks/:id',async(req, res)=>{
 
 });
 
-app.delete('/tasks/:id',(req, res)=>{
+app.delete('/tasks/:id',async(req, res)=>{
+    try{
+        const {id} = req.params;
+        await deleteTask(id);
+        res.status(201).json({message:"Tarea eliminada"});
+
+    }catch(error){
+        res.status(404).json({error:"No se puedo eliminar la tarea"})
+    }
 
 });
 app.listen(3000,'127.0.0.1',()=>{
