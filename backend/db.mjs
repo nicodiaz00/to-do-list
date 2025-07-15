@@ -24,3 +24,8 @@ export async function postTask(title, description) {
 export async function putTask(title, description,completed,id){
     await db.run(`UPDATE TASKS set Title = ?, Description_ = ?, Completed = ? where Id = ?`,[title,description,completed,id]);
 }
+
+export async function deleteTask(id) {
+    await db.run(`DELETE FROM TASKS WHERE Id = ?`,[id])
+    
+}
