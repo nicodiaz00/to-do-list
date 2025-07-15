@@ -20,3 +20,7 @@ export async function postTask(title, description) {
 
  
 }
+
+export async function putTask(title, description,completed,id){
+    await db.run(`UPDATE TASKS set Title = ?, Description_ = ?, Completed = ? where Id = ?`,[title,description,completed,id]);
+}

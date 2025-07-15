@@ -5,6 +5,3 @@ CREATE TABLE IF NOT EXISTS TASKS (
   Completed BOOLEAN NOT NULL,
   CreateDate DATE NOT NULL
 );
-
-INSERT INTO TASKS (Title, Description_, Completed, CreateDate)
-VALUES ('Tarea inicial', 'Tarea ejemplo', 0, DATE('now'));
