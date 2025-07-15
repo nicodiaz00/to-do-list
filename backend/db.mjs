@@ -12,3 +12,11 @@ export async function listTasks() {
 
     
 }
+
+export async function postTask(title, description) {
+        await db.run(`
+    INSERT INTO TASKS (Title, Description_, Completed, CreateDate)
+    VALUES (?, ?, 0, DATE('now'))`,[title,description]);
+
+ 
+}
