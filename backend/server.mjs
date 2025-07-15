@@ -1,5 +1,6 @@
 import express from 'express';
 import { listTasks } from './db.mjs';
+import { postTask } from './db.mjs';
 const app = express();
 
 
@@ -16,7 +17,15 @@ app.get('/tasks', async(req, res) =>{
 
 });
 
-app.post('/tasks',(req, res)=> {
+app.post('/tasks',async(req, res)=> {
+    try{
+        const {title, description} = req.body;
+        await postTask(title,description);
+        res.status(201).json({message:"Tarea creada"});
+
+    }catch(error){
+        res.status(404).json({error:"No se puedo crear la tarea"})
+    }
 
 });
 
